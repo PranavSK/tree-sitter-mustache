@@ -1,0 +1,93 @@
+===
+Text Node
+===
+This is a text node.
+---
+(source_file
+  (text_node))
+
+===
+Comments
+===
+12345{{! Comment Block! }}67890
+---
+(source_file
+  (text_node)
+  (comment)
+  (text_node)
+)
+
+===
+Multi-line Comments
+===
+12345{{!
+  This is a multi-line comment.
+  It can span multiple lines.
+}}67890
+---
+(source_file
+  (text_node)
+  (comment)
+  (text_node))
+
+===
+Interpolation
+===
+Hello, {{subject}}!
+---
+(source_file
+  (text_node)
+  (interpolation
+    path: (identifier))
+  (text_node)
+)
+
+===
+Interpolation - dotted path
+===
+Hello, {{subject.name}}!
+---
+(source_file
+  (text_node)
+  (interpolation
+    path: (path_expression
+      (identifier)
+      (identifier)))
+  (text_node))
+
+===
+Sections
+===
+{{#boolean}}This should be rendered.{{/boolean}}
+---
+(source_file
+  (block
+    (block_start
+      path: (identifier))
+    content: (text_node)
+    (block_end
+      path: (identifier))))
+
+===
+Inverted Sections
+===
+{{^boolean}}This should be rendered.{{/boolean}}
+---
+(source_file
+  (block
+    (block_start
+      path: (identifier))
+    content: (text_node)
+    (block_end
+      path: (identifier))))
+
+===
+Partial
+===
+{{> test/corpus/partial.txt}}
+---
+(source_file
+  (partial
+    path: (string)))
+
+
